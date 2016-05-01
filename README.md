@@ -1,7 +1,7 @@
 hello-samza-base
 ===========
 
-Hello Samza Base is based on Samza's [Hello Samza](https://github.com/apache/samza-hello-samza) project (based on apache/samza-hello-samza@2214946c0b5498f9942e4ecdd4327fea4081b689).
+Hello Samza Base is based on Samza's [Hello Samza](https://github.com/apache/samza-hello-samza) project (based on [apache/samza-hello-samza@`2214946`](https://github.com/apache/samza-hello-samza/tree/2214946c0b5498f9942e4ecdd4327fea4081b689)).
 
 It removes the bootstrapping and cluster-management tools to serve as a boilerplate from which you can create your own simple Samza tasks.
 
