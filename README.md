@@ -1,14 +1,31 @@
-hello-samza
+hello-samza-base
 ===========
 
-Hello Samza is a starter project for [Apache Samza](http://samza.apache.org/) jobs.
+Hello Samza Base is based on Samza's [Hello Samza](https://github.com/apache/samza-hello-samza) project (based on apache/samza-hello-samza@2214946c0b5498f9942e4ecdd4327fea4081b689).
 
-Please see [Hello Samza](http://samza.apache.org/startup/hello-samza/0.9/) to get started.
+It removes the bootstrapping and cluster-management tools to serve as a boilerplate from which you can create your own simple Samza tasks.
 
-### Pull requests and questions
+### Running Hello Samza Base
 
-[Hello Samza](http://samza.apache.org/startup/hello-samza/0.10/) is developed as part of the [Apache Samza](http://samza.apache.org) project. Please direct questions, improvements and bug fixes there. Questions about [Hello Samza](http://samza.apache.org/startup/hello-samza/0.9/) are welcome on the [dev list](http://samza.apache.org/community/mailing-lists.html) and the [Samza JIRA](https://issues.apache.org/jira/browse/SAMZA) has a hello-samza component for filing tickets.
+To run, you must have the existing Hello Samza infrastructure set up. Once that is ready, you can compile the tasks here and run them on the existing cluster.
 
-### Contribution
+```sh
+mvn clean package
+mkdir -p deploy/samza
+tar -xvf ./target/hello-samza-0.10.1-dist.tar.gz -C deploy/samza
+deploy/samza/bin/run-job.sh --config-factory=org.apache.samza.config.factories.PropertiesConfigFactory --config-path=file://$PWD/deploy/samza/config/wikipedia-feed.properties
+deploy/samza/bin/run-job.sh --config-factory=org.apache.samza.config.factories.PropertiesConfigFactory --config-path=file://$PWD/deploy/samza/config/wikipedia-parser.properties
+deploy/samza/bin/run-job.sh --config-factory=org.apache.samza.config.factories.PropertiesConfigFactory --config-path=file://$PWD/deploy/samza/config/wikipedia-stats.properties
+```
 
-To start contributing on [Hello Samza](http://samza.apache.org/startup/hello-samza/0.10/) first read [Rules](http://samza.apache.org/contribute/rules.html) and [Contributor Corner](https://cwiki.apache.org/confluence/display/SAMZA/Contributor%27s+Corner). Notice that [Hello Samza](http://samza.apache.org/startup/hello-samza/0.10/) git repository does not support git pull request.
+### Make it your own
+
+There are some customizations you should do to make this repository your own.
+
+1. Update pom.xml with your project, version, organization, and developer details.
+  * This will change the deploy commands above. E.g. `hello-samza` and `0.10.1` are driven by `artifactId` and `version`.
+1. Remove or update LICENSE to match your licensing desires.
+1. Remove or update the code under `src/main/java/samza`
+1. Remove or update the code under `src/main/config/wikipedia-*.properties`
+  * This will change the deploy commands above. E.g. replace `wikipedia-feed.properties` with your new properties file.
+1. Update or remove this README.
